@@ -29,3 +29,56 @@
         </v-layout>
 			</v-container>
 		</v-content></v-app></div></template>
+
+<script>
+export default {
+  name: 'app',
+  data () {
+    return {
+      notes: [],
+      size: 0,
+      input: '',
+	    hasInputText: false,
+    }
+  },
+
+  computed: {
+    },
+  created () {
+  },
+  watch: {
+    input: function () {
+      if (this.input.length === 0) {
+		    this.hasInputText = false
+      } else {
+		    this.hasInputText = true
+      }
+    },
+  },
+
+  methods: {
+    addNote () {
+      var note = {
+        name: this.input
+      }
+      this.notes.splice(++this.size)
+      this.$set(this.notes, this.size - 1, note)
+      this.input = ''
+    },
+    deleteNote (index) {
+      this.notes.splice(index, 1)
+      this.notes.splice(--this.size)
+    },
+    }
+  }
+</script>
+
+<style>
+#app {
+  font-family: 'Monaco', courier, monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+}
+
+</style>
